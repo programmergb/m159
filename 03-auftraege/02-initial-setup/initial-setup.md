@@ -32,12 +32,28 @@ Client (`m159-client-sg`, 9 eingehende Regeln):
 
 ![Sicherheitsgruppe m159-client-sg](resources/sg-client-eingehende-regeln.png)
 
-## 3. Grundkonfiguration der Server
+## 3. Instanzen
+
+Die drei Server laufen als EC2-Instanzen. Aus den Bildern in diesem Dokument ergeben sich
+folgende Eckdaten:
+
+| Server | Private IP | Availability Zone | Typ | Betriebssystem |
+| --- | --- | --- | --- | --- |
+| dc1 | 10.0.0.10 | us-east-1a | t3.micro | Windows Server 2025 Datacenter |
+| client1 | 10.0.0.20 | – | – | – |
+| adminctr1 | – | – | – | – |
+
+Die öffentlichen Adressen ändern sich nach jedem Lab-Neustart, weil keine Elastic IP
+vergeben ist. Für den Zugriff nehme ich deshalb jeweils die aktuelle Adresse aus der
+EC2-Konsole. Felder mit "–" sind in den vorhandenen Nachweisen nicht belegt und werden mit
+dem Bild der EC2-Instanzliste ergänzt.
+
+## 4. Grundkonfiguration der Server
 
 Die folgenden Einstellungen habe ich auf den Servern vorgenommen. Befehle liefen in einer
 PowerShell mit Administratorrechten.
 
-### 3.1 Hostname
+### 4.1 Hostname
 
 `Rename-Computer -NewName "<name>"`, danach Neustart. dc1 im Server Manager (Local Server)
 mit dem Computernamen `dc1` in der Arbeitsgruppe `WORKGROUP`; das Betriebssystem ist
@@ -50,7 +66,7 @@ Auf dem Desktop von dc1 zeigt die Bildschirmeinblendung Hostname `dc1`, die priv
 
 ![dc1 Desktop](resources/dc1-desktop-und-powershell.png)
 
-### 3.2 Ping erlauben
+### 4.2 Ping erlauben
 
 Eine Firewallregel erlaubt eingehende ICMPv4-Echo-Anfragen:
 
@@ -61,7 +77,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping" `
 
 ![Firewallregel erstellt](resources/ping-firewallregel-erstellt.png)
 
-### 3.3 Tastaturlayout Deutsch (Schweiz)
+### 4.3 Tastaturlayout Deutsch (Schweiz)
 
 ```powershell
 Set-WinUserLanguageList de-CH -Force
@@ -70,7 +86,7 @@ Set-WinUserLanguageList de-CH -Force
 Windows weist darauf hin, dass die Anzeigesprache erst nach der nächsten Anmeldung
 wirksam wird (Warnung im PowerShell-Fenster auf den Bildern unten).
 
-### 3.4 IPv6 deaktivieren
+### 4.4 IPv6 deaktivieren
 
 ```powershell
 Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6
@@ -81,7 +97,7 @@ Die Kontrolle zeigt `Enabled = False`:
 
 ![IPv6 deaktiviert](resources/ipv6-deaktiviert.png)
 
-### 3.5 CMD und PowerShell auf dem Desktop
+### 4.5 CMD und PowerShell auf dem Desktop
 
 Zwei Verknüpfungen habe ich per Skript angelegt:
 
@@ -101,7 +117,7 @@ Ablauf dieser Befehle inklusive IPv6-Kontrolle auf zwei weiteren Servern:
 
 ![Befehle und IPv6-Kontrolle](resources/befehle-und-ipv6-kontrolle.png)
 
-### 3.6 IE Enhanced Security ausschalten
+### 4.6 IE Enhanced Security ausschalten
 
 Im Server Manager unter *Local Server → IE Enhanced Security Configuration* habe ich die
 Einstellung für Administratoren und Benutzer auf `Off` gestellt. Die Kontrolle auf dc1 zeigt
@@ -111,7 +127,7 @@ Lab-Neustart wechselt:
 
 ![dc1: IE Enhanced Security Off](resources/dc1-ie-enhanced-security-off.png)
 
-### 3.7 Explorer-Optionen
+### 4.7 Explorer-Optionen
 
 Im Explorer unter *Options → View* habe ich versteckte Dateien und Ordner eingeblendet und
 die Dateiendungen bekannter Dateitypen angezeigt. Beim Einblenden der geschützten
@@ -121,19 +137,19 @@ Systemdateien fragt Windows nach einer Bestätigung:
 
 ![Ordneroptionen](resources/explorer-optionen-ansicht.png)
 
-### 3.8 Desktop-Symbole
+### 4.8 Desktop-Symbole
 
 Über *Personalize → Themes → Desktop icon settings* habe ich Computer (This PC),
 Control Panel und Network eingeblendet:
 
 ![Desktop icon settings](resources/desktop-icon-settings.png)
 
-### 3.9 Neustart
+### 4.9 Neustart
 
 Nach den Einstellungen habe ich jeden Server neu gestartet, damit Hostname und Tastaturlayout
 sicher übernommen sind.
 
-## 4. Kontrolle client1
+## 5. Kontrolle client1
 
 Auf client1 habe ich die Einstellungen mit Abfragen geprüft: Hostname `client1`, Sprache
 `de-CH`, IPv6 `Enabled = False`, private Adresse `10.0.0.20`, Firewallregel
@@ -145,13 +161,9 @@ Der Ping mit vollständiger Statistik (3 von 3 Paketen, 0 % Verlust):
 
 ![client1: Ping auf dc1](resources/client1-ping-und-firewallregel.png)
 
-## 5. Offene Punkte
+## 6. Offene Punkte
 
-- Auf dem Bild in 3.1 stand IE Enhanced Security auf dc1 noch auf `On`; erst das Bild in 3.6
-  zeigt `Off`.
 - Nachweisbilder für IE Enhanced Security, Hostname, Desktop-Symbole (This PC, Control Panel,
-  Network) und "Use Sharing Wizard" aus für client1 und adminctr1 fehlen noch.
-- AWS-Konsole: Bilder der EC2-Instanzliste und der VPC folgen.
-- Administrator-Passwörter von dc1 und client1 ändern, da sie ausserhalb des Passwort-Managers
-  sichtbar waren.
-- Danach weiter mit Auftrag 03 (Domain Controller und Client).
+  Network) und "Use Sharing Wizard" aus für client1 und adminctr1
+- Bild der EC2-Instanzliste mit allen drei Servern (ergänzt die Tabelle in Abschnitt 3)
+- Danach weiter mit Auftrag 03 (Domain Controller und Client)
