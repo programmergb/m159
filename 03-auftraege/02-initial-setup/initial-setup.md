@@ -73,12 +73,14 @@ EC2-Konsole.
 
 ## 5. Grundkonfiguration der Server
 
-Die folgenden Einstellungen habe ich auf den Servern vorgenommen. Befehle liefen in einer
-PowerShell mit Administratorrechten.
+Die folgenden Einstellungen habe ich auf allen drei Servern (dc1, client1, adminctr1)
+vorgenommen. Befehle liefen in einer PowerShell mit Administratorrechten. Die Bilder zeigen
+jeweils einzelne Server als Beispiel, die Schritte waren auf allen Servern identisch.
 
 ### 5.1 Hostname
 
-`Rename-Computer -NewName "<name>"`, danach Neustart. dc1 im Server Manager (Local Server)
+Jeden Server habe ich mit `Rename-Computer -NewName "<name>"` so benannt wie seine
+EC2-Instanz (`dc1`, `client1`, `adminctr1`) und danach neu gestartet. dc1 im Server Manager (Local Server)
 mit dem Computernamen `dc1` in der Arbeitsgruppe `WORKGROUP`; das Betriebssystem ist
 Windows Server 2025 Datacenter auf einer EC2-Instanz `t3.micro`:
 
@@ -91,7 +93,7 @@ Auf dem Desktop von dc1 zeigt die Bildschirmeinblendung Hostname `dc1`, die priv
 
 ### 5.2 Ping erlauben
 
-Eine Firewallregel erlaubt eingehende ICMPv4-Echo-Anfragen:
+Auf allen drei Servern erlaubt eine Firewallregel eingehende ICMPv4-Echo-Anfragen:
 
 ```powershell
 New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping" `
@@ -106,8 +108,9 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping" `
 Set-WinUserLanguageList de-CH -Force
 ```
 
-Windows weist darauf hin, dass die Anzeigesprache erst nach der nächsten Anmeldung
-wirksam wird (Warnung im PowerShell-Fenster auf den Bildern unten).
+Das habe ich auf allen drei Servern gemacht. Windows weist darauf hin, dass die
+Anzeigesprache erst nach der nächsten Anmeldung wirksam wird (Warnung im PowerShell-Fenster
+auf den Bildern unten). Auf client1 zeigt die Kontrolle `de-CH` (siehe Abschnitt 6).
 
 ### 5.4 IPv6 deaktivieren
 
@@ -116,13 +119,13 @@ Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6
 Get-NetAdapterBinding -ComponentID ms_tcpip6
 ```
 
-Die Kontrolle zeigt `Enabled = False`:
+Das habe ich auf allen drei Servern gemacht. Die Kontrolle zeigt jeweils `Enabled = False`:
 
 ![IPv6 deaktiviert](resources/ipv6-deaktiviert.png)
 
 ### 5.5 CMD und PowerShell auf dem Desktop
 
-Zwei Verknüpfungen habe ich per Skript angelegt:
+Auf allen drei Servern habe ich zwei Verknüpfungen (CMD und PowerShell) per Skript angelegt:
 
 ```powershell
 $ws = New-Object -ComObject WScript.Shell
@@ -143,8 +146,8 @@ Ablauf dieser Befehle inklusive IPv6-Kontrolle auf zwei weiteren Servern:
 ### 5.6 IE Enhanced Security ausschalten
 
 Im Server Manager unter *Local Server → IE Enhanced Security Configuration* habe ich die
-Einstellung für Administratoren und Benutzer auf `Off` gestellt. Die Kontrolle auf dc1 zeigt
-`Off`. Die öffentliche Adresse in der Titelleiste hat sich gegenüber früheren Bildern
+Einstellung für Administratoren und Benutzer auf `Off` gestellt, auf allen drei Servern. Die
+Kontrolle auf dc1 zeigt `Off`. Die öffentliche Adresse in der Titelleiste hat sich gegenüber früheren Bildern
 geändert, weil die Instanzen keine Elastic IP haben und die Adresse nach einem
 Lab-Neustart wechselt:
 
@@ -152,9 +155,15 @@ Lab-Neustart wechselt:
 
 ### 5.7 Explorer-Optionen
 
-Im Explorer unter *Options → View* habe ich versteckte Dateien und Ordner eingeblendet und
-die Dateiendungen bekannter Dateitypen angezeigt. Beim Einblenden der geschützten
-Systemdateien fragt Windows nach einer Bestätigung:
+Im Explorer unter *Options → View* habe ich auf allen drei Servern folgende Einstellungen
+geändert:
+
+- «Hide extensions for known file types» deaktiviert, damit Dateiendungen sichtbar sind
+- «Use Sharing Wizard» deaktiviert
+- «Hide protected operating system files» deaktiviert und «Show hidden files, folders, and
+  drives» aktiviert, damit alle Dateien angezeigt werden
+
+Beim Einblenden der geschützten Systemdateien fragt Windows nach einer Bestätigung:
 
 ![Warnung geschützte Systemdateien](resources/explorer-warnung-systemdateien.png)
 
@@ -162,8 +171,8 @@ Systemdateien fragt Windows nach einer Bestätigung:
 
 ### 5.8 Desktop-Symbole
 
-Über *Personalize → Themes → Desktop icon settings* habe ich Computer (This PC),
-Control Panel und Network eingeblendet:
+Über *Personalize → Themes → Desktop icon settings* habe ich auf allen drei Servern Computer
+(This PC), Control Panel und Network eingeblendet:
 
 ![Desktop icon settings](resources/desktop-icon-settings.png)
 
@@ -173,7 +182,7 @@ Der Dialog im Detail, mit angehakten Symbolen Computer (This PC), Control Panel 
 
 ### 5.9 Neustart
 
-Nach den Einstellungen habe ich jeden Server neu gestartet, damit Hostname und Tastaturlayout
+Nach den Einstellungen habe ich alle drei Server neu gestartet, damit Hostname und Tastaturlayout
 sicher übernommen sind.
 
 ### 5.10 Administrator-Passwort ändern
