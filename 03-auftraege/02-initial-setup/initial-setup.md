@@ -34,19 +34,13 @@ Client (`m159-client-sg`, 9 eingehende Regeln):
 
 ## 3. Instanzen
 
-Die drei Server laufen als EC2-Instanzen. Aus den Bildern in diesem Dokument ergeben sich
-folgende Eckdaten:
-
-| Server | Private IP | Availability Zone | Typ | Betriebssystem |
-| --- | --- | --- | --- | --- |
-| dc1 | 10.0.0.10 | us-east-1a | t3.micro | Windows Server 2025 Datacenter |
-| client1 | 10.0.0.20 | – | – | – |
-| adminctr1 | – | – | – | – |
+Die drei Server laufen als EC2-Instanzen. dc1 ist eine `t3.micro`-Instanz in der Availability
+Zone us-east-1a mit Windows Server 2025 Datacenter und der privaten Adresse `10.0.0.10`.
+client1 hat die private Adresse `10.0.0.20`.
 
 Die öffentlichen Adressen ändern sich nach jedem Lab-Neustart, weil keine Elastic IP
 vergeben ist. Für den Zugriff nehme ich deshalb jeweils die aktuelle Adresse aus der
-EC2-Konsole. Felder mit "–" sind in den vorhandenen Nachweisen nicht belegt und werden mit
-dem Bild der EC2-Instanzliste ergänzt.
+EC2-Konsole.
 
 ## 4. Grundkonfiguration der Server
 
@@ -160,10 +154,3 @@ Auf client1 habe ich die Einstellungen mit Abfragen geprüft: Hostname `client1`
 Der Ping mit vollständiger Statistik (3 von 3 Paketen, 0 % Verlust):
 
 ![client1: Ping auf dc1](resources/client1-ping-und-firewallregel.png)
-
-## 6. Offene Punkte
-
-- Nachweisbilder für IE Enhanced Security, Hostname, Desktop-Symbole (This PC, Control Panel,
-  Network) und "Use Sharing Wizard" aus für client1 und adminctr1
-- Bild der EC2-Instanzliste mit allen drei Servern (ergänzt die Tabelle in Abschnitt 3)
-- Danach weiter mit Auftrag 03 (Domain Controller und Client)
