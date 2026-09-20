@@ -34,9 +34,14 @@ Client (`m159-client-sg`, 9 eingehende Regeln):
 
 ## 3. Instanzen
 
-Die drei Server laufen als EC2-Instanzen. dc1 ist eine `t3.micro`-Instanz in der Availability
-Zone us-east-1a mit Windows Server 2025 Datacenter und der privaten Adresse `10.0.0.10`.
-client1 hat die private Adresse `10.0.0.20`.
+Die drei Server laufen als EC2-Instanzen vom Typ `t3.micro`. In der EC2-Konsole sind alle
+drei im Zustand "Läuft" und haben 3/3 bestandene Statusprüfungen. dc1 und client1 liegen in
+der Availability Zone us-east-1a, adminctr1 in us-east-1b:
+
+![EC2-Instanzliste](resources/ec2-instanzliste.png)
+
+dc1 läuft mit Windows Server 2025 Datacenter und der privaten Adresse `10.0.0.10`, client1
+hat die private Adresse `10.0.0.20`.
 
 Die öffentlichen Adressen ändern sich nach jedem Lab-Neustart, weil keine Elastic IP
 vergeben ist. Für den Zugriff nehme ich deshalb jeweils die aktuelle Adresse aus der
@@ -138,10 +143,24 @@ Control Panel und Network eingeblendet:
 
 ![Desktop icon settings](resources/desktop-icon-settings.png)
 
+Der Dialog im Detail, mit angehakten Symbolen Computer (This PC), Control Panel und Network:
+
+![Desktop Icons](resources/desktop-icons-dialog.png)
+
 ### 4.9 Neustart
 
 Nach den Einstellungen habe ich jeden Server neu gestartet, damit Hostname und Tastaturlayout
 sicher übernommen sind.
+
+### 4.10 Administrator-Passwort ändern
+
+Das von AWS vergebene Administrator-Passwort habe ich durch ein eigenes ersetzt. Dafür habe
+ich in der PowerShell `net user Administrator *` ausgeführt, das neue Passwort zweimal
+eingegeben (die Eingabe bleibt unsichtbar) und die Bestätigung erhalten:
+
+![Passwort geändert](resources/administrator-passwort-aendern.png)
+
+Das neue Passwort steht nicht in diesem Repository.
 
 ## 5. Kontrolle client1
 
