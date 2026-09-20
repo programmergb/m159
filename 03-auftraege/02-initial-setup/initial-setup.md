@@ -127,8 +127,11 @@ sicher übernommen sind.
 
 Auf client1 habe ich die Einstellungen mit Abfragen geprüft: Hostname `client1`, Sprache
 `de-CH`, IPv6 `Enabled = False`, private Adresse `10.0.0.20`, Firewallregel
-`Allow ICMPv4 Ping` aktiv. Ein Ping auf dc1 (`10.0.0.10`) wurde mit 3 von 3 Paketen
-beantwortet:
+`Allow ICMPv4 Ping` aktiv. Ein Ping auf dc1 (`10.0.0.10`) wurde beantwortet:
+
+![client1: Abfragen und Ping](resources/client1-abfragen.png)
+
+Der Ping mit vollständiger Statistik (3 von 3 Paketen, 0 % Verlust):
 
 ![client1: Ping auf dc1](resources/client1-ping-und-firewallregel.png)
 
