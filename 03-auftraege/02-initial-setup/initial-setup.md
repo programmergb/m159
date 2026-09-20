@@ -101,7 +101,17 @@ Ablauf dieser Befehle inklusive IPv6-Kontrolle auf zwei weiteren Servern:
 
 ![Befehle und IPv6-Kontrolle](resources/befehle-und-ipv6-kontrolle.png)
 
-### 3.6 Explorer-Optionen
+### 3.6 IE Enhanced Security ausschalten
+
+Im Server Manager unter *Local Server → IE Enhanced Security Configuration* habe ich die
+Einstellung für Administratoren und Benutzer auf `Off` gestellt. Die Kontrolle auf dc1 zeigt
+`Off`. Die öffentliche Adresse in der Titelleiste hat sich gegenüber früheren Bildern
+geändert, weil die Instanzen keine Elastic IP haben und die Adresse nach einem
+Lab-Neustart wechselt:
+
+![dc1: IE Enhanced Security Off](resources/dc1-ie-enhanced-security-off.png)
+
+### 3.7 Explorer-Optionen
 
 Im Explorer unter *Options → View* habe ich versteckte Dateien und Ordner eingeblendet und
 die Dateiendungen bekannter Dateitypen angezeigt. Beim Einblenden der geschützten
@@ -111,14 +121,14 @@ Systemdateien fragt Windows nach einer Bestätigung:
 
 ![Ordneroptionen](resources/explorer-optionen-ansicht.png)
 
-### 3.7 Desktop-Symbole
+### 3.8 Desktop-Symbole
 
 Über *Personalize → Themes → Desktop icon settings* habe ich Computer (This PC),
 Control Panel und Network eingeblendet:
 
 ![Desktop icon settings](resources/desktop-icon-settings.png)
 
-### 3.8 Neustart
+### 3.9 Neustart
 
 Nach den Einstellungen habe ich jeden Server neu gestartet, damit Hostname und Tastaturlayout
 sicher übernommen sind.
@@ -137,11 +147,10 @@ Der Ping mit vollständiger Statistik (3 von 3 Paketen, 0 % Verlust):
 
 ## 5. Offene Punkte
 
-- **IE Enhanced Security Configuration** stand auf dc1 zum Zeitpunkt des Bildes 3.1 noch auf
-  `On`. Die Vorgabe ist `Off` (Server Manager → Local Server). Nachweis nach der Änderung
-  fehlt noch.
-- Nachweisbilder für Hostname, Desktop-Symbole (This PC, Control Panel, Network) und
-  "Use Sharing Wizard" aus für client1 und adminctr1 fehlen noch.
+- Auf dem Bild in 3.1 stand IE Enhanced Security auf dc1 noch auf `On`; erst das Bild in 3.6
+  zeigt `Off`.
+- Nachweisbilder für IE Enhanced Security, Hostname, Desktop-Symbole (This PC, Control Panel,
+  Network) und "Use Sharing Wizard" aus für client1 und adminctr1 fehlen noch.
 - AWS-Konsole: Bilder der EC2-Instanzliste und der VPC folgen.
 - Administrator-Passwörter von dc1 und client1 ändern, da sie ausserhalb des Passwort-Managers
   sichtbar waren.
