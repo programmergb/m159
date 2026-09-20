@@ -19,7 +19,31 @@ Hinweis zum Lab: Läuft die Lab-Session ab, verweigert die AWS-Konsole plötzlic
 der Vocareum-Seite das Lab neu starten ("Start Lab"), warten bis es aktiv ist und die
 Konsole neu öffnen. Die Instanzen bleiben dabei bestehen.
 
-## 2. Sicherheitsgruppen
+## 2. VPC und Subnetze
+
+Ich habe eine eigene VPC `m159-vpc` mit dem Adressbereich `10.0.0.0/16` angelegt, getrennt von
+der Standard-VPC des Labs (`172.31.0.0/16`):
+
+![VPC-Liste](resources/vpc-liste.png)
+
+In der VPC liegen vier Subnetze, zwei öffentliche und zwei private, mit den in der
+[Planung](../01-planung/planung.md) vorgesehenen Adressbereichen:
+
+| Subnetz | IPv4-CIDR |
+| --- | --- |
+| public1 | 10.0.0.0/20 |
+| public2 | 10.0.16.0/20 |
+| private1 | 10.0.128.0/20 |
+| private2 | 10.0.144.0/20 |
+
+![Subnetze](resources/subnetze.png)
+
+Für die öffentlichen Subnetze gibt es die Routing-Tabelle `m159-public-rt`, der zwei Subnetze
+explizit zugeordnet sind:
+
+![Routing-Tabellen](resources/routing-tabellen.png)
+
+## 3. Sicherheitsgruppen
 
 Für die Server habe ich zwei Sicherheitsgruppen erstellt, jeweils mit den Ports, die
 Active Directory braucht (RDP, DNS, LDAP/LDAPS, Kerberos, SMB, RPC, Global Catalog, ICMP).
@@ -32,7 +56,7 @@ Client (`m159-client-sg`, 9 eingehende Regeln):
 
 ![Sicherheitsgruppe m159-client-sg](resources/sg-client-eingehende-regeln.png)
 
-## 3. Instanzen
+## 4. Instanzen
 
 Die drei Server laufen als EC2-Instanzen vom Typ `t3.micro`. In der EC2-Konsole sind alle
 drei im Zustand "Läuft" und haben 3/3 bestandene Statusprüfungen. dc1 und client1 liegen in
@@ -47,12 +71,12 @@ Die öffentlichen Adressen ändern sich nach jedem Lab-Neustart, weil keine Elas
 vergeben ist. Für den Zugriff nehme ich deshalb jeweils die aktuelle Adresse aus der
 EC2-Konsole.
 
-## 4. Grundkonfiguration der Server
+## 5. Grundkonfiguration der Server
 
 Die folgenden Einstellungen habe ich auf den Servern vorgenommen. Befehle liefen in einer
 PowerShell mit Administratorrechten.
 
-### 4.1 Hostname
+### 5.1 Hostname
 
 `Rename-Computer -NewName "<name>"`, danach Neustart. dc1 im Server Manager (Local Server)
 mit dem Computernamen `dc1` in der Arbeitsgruppe `WORKGROUP`; das Betriebssystem ist
@@ -65,7 +89,7 @@ Auf dem Desktop von dc1 zeigt die Bildschirmeinblendung Hostname `dc1`, die priv
 
 ![dc1 Desktop](resources/dc1-desktop-und-powershell.png)
 
-### 4.2 Ping erlauben
+### 5.2 Ping erlauben
 
 Eine Firewallregel erlaubt eingehende ICMPv4-Echo-Anfragen:
 
@@ -76,7 +100,7 @@ New-NetFirewallRule -DisplayName "Allow ICMPv4 Ping" `
 
 ![Firewallregel erstellt](resources/ping-firewallregel-erstellt.png)
 
-### 4.3 Tastaturlayout Deutsch (Schweiz)
+### 5.3 Tastaturlayout Deutsch (Schweiz)
 
 ```powershell
 Set-WinUserLanguageList de-CH -Force
@@ -85,7 +109,7 @@ Set-WinUserLanguageList de-CH -Force
 Windows weist darauf hin, dass die Anzeigesprache erst nach der nächsten Anmeldung
 wirksam wird (Warnung im PowerShell-Fenster auf den Bildern unten).
 
-### 4.4 IPv6 deaktivieren
+### 5.4 IPv6 deaktivieren
 
 ```powershell
 Disable-NetAdapterBinding -Name "*" -ComponentID ms_tcpip6
@@ -96,7 +120,7 @@ Die Kontrolle zeigt `Enabled = False`:
 
 ![IPv6 deaktiviert](resources/ipv6-deaktiviert.png)
 
-### 4.5 CMD und PowerShell auf dem Desktop
+### 5.5 CMD und PowerShell auf dem Desktop
 
 Zwei Verknüpfungen habe ich per Skript angelegt:
 
@@ -116,7 +140,7 @@ Ablauf dieser Befehle inklusive IPv6-Kontrolle auf zwei weiteren Servern:
 
 ![Befehle und IPv6-Kontrolle](resources/befehle-und-ipv6-kontrolle.png)
 
-### 4.6 IE Enhanced Security ausschalten
+### 5.6 IE Enhanced Security ausschalten
 
 Im Server Manager unter *Local Server → IE Enhanced Security Configuration* habe ich die
 Einstellung für Administratoren und Benutzer auf `Off` gestellt. Die Kontrolle auf dc1 zeigt
@@ -126,7 +150,7 @@ Lab-Neustart wechselt:
 
 ![dc1: IE Enhanced Security Off](resources/dc1-ie-enhanced-security-off.png)
 
-### 4.7 Explorer-Optionen
+### 5.7 Explorer-Optionen
 
 Im Explorer unter *Options → View* habe ich versteckte Dateien und Ordner eingeblendet und
 die Dateiendungen bekannter Dateitypen angezeigt. Beim Einblenden der geschützten
@@ -136,7 +160,7 @@ Systemdateien fragt Windows nach einer Bestätigung:
 
 ![Ordneroptionen](resources/explorer-optionen-ansicht.png)
 
-### 4.8 Desktop-Symbole
+### 5.8 Desktop-Symbole
 
 Über *Personalize → Themes → Desktop icon settings* habe ich Computer (This PC),
 Control Panel und Network eingeblendet:
@@ -147,12 +171,12 @@ Der Dialog im Detail, mit angehakten Symbolen Computer (This PC), Control Panel 
 
 ![Desktop Icons](resources/desktop-icons-dialog.png)
 
-### 4.9 Neustart
+### 5.9 Neustart
 
 Nach den Einstellungen habe ich jeden Server neu gestartet, damit Hostname und Tastaturlayout
 sicher übernommen sind.
 
-### 4.10 Administrator-Passwort ändern
+### 5.10 Administrator-Passwort ändern
 
 Das von AWS vergebene Administrator-Passwort habe ich durch ein eigenes ersetzt. Dafür habe
 ich in der PowerShell `net user Administrator *` ausgeführt, das neue Passwort zweimal
@@ -162,7 +186,7 @@ eingegeben (die Eingabe bleibt unsichtbar) und die Bestätigung erhalten:
 
 Das neue Passwort steht nicht in diesem Repository.
 
-## 5. Kontrolle client1
+## 6. Kontrolle client1
 
 Auf client1 habe ich die Einstellungen mit Abfragen geprüft: Hostname `client1`, Sprache
 `de-CH`, IPv6 `Enabled = False`, private Adresse `10.0.0.20`, Firewallregel

@@ -52,9 +52,12 @@ offene Port.
 Der DC bekommt eine statische IP, weil Client und Admin-Center-Server ihre DNS-Anfragen fest
 an diese Adresse richten – ändert sie sich, laufen alle Namensauflösungen ins Leere. IPs und
 Hostnamen werden deshalb jetzt vorab festgelegt statt erst beim Aufsetzen ad hoc vergeben, um
-spätere Nacharbeit und Adresskonflikte zu vermeiden. Elastic IPs, VPC-ID und die genauen
-Subnetz-IDs trage ich hier nach, sobald die Ressourcen in AWS effektiv angelegt sind (Auftrag
-02).
+spätere Nacharbeit und Adresskonflikte zu vermeiden.
+
+Umsetzung in Auftrag 02 (siehe [Dokumentation](../02-initial-setup/initial-setup.md)): Die VPC
+heisst `m159-vpc` (`vpc-04e7c91259eea14e7`), die vier Subnetze wurden mit den geplanten
+Adressbereichen angelegt. Abweichung von der Planung: Es wurden keine Elastic IPs vergeben,
+die öffentlichen Adressen wechseln daher nach einem Lab-Neustart.
 
 ## Testbenutzer für spätere Berechtigungstests
 
@@ -70,6 +73,5 @@ Für Auftrag 04 (Freigaben/Berechtigungen) plane ich je einen fiktiven Benutzer 
 ## Offene Punkte
 
 - Azure for Students / AWS-Account aktivieren, Nachweis-Screenshots ablegen
-- VPC/Subnetz-/Elastic-IP-Werte nach effektiver Erstellung ergänzen (Auftrag 02)
 - Entra-ID-Tenant-Domain und Global-Administrator-Konto nach Tenant-Erstellung ergänzen
 - Python-App-Registrierung (Tenant/Client-ID) folgt erst mit Auftrag 13
