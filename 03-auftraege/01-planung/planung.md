@@ -57,7 +57,9 @@ spätere Nacharbeit und Adresskonflikte zu vermeiden.
 Umsetzung in Auftrag 02 (siehe [Dokumentation](../02-initial-setup/initial-setup.md)): Die VPC
 heisst `m159-vpc` (`vpc-04e7c91259eea14e7`), die vier Subnetze wurden mit den geplanten
 Adressbereichen angelegt. Abweichung von der Planung: Es wurden keine Elastic IPs vergeben,
-die öffentlichen Adressen wechseln daher nach einem Lab-Neustart.
+die öffentlichen Adressen wechseln daher nach einem Lab-Neustart. Zweite Abweichung: In der
+Sicherheitsgruppe des Domain Controllers habe ich zusätzlich TCP 139 (NetBIOS) für das
+VPC-CIDR geöffnet, weil der Port-Test aus Auftrag 03 ihn verlangt.
 
 ## Testbenutzer für spätere Berechtigungstests
 
