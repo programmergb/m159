@@ -1,0 +1,105 @@
+<svg viewBox="0 0 980 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <style>
+    .box { fill: #eef3fb; stroke: #2c5da8; stroke-width: 1.5; rx: 8; }
+    .box-dl { fill: #fbeeee; stroke: #a82c2c; stroke-width: 1.5; rx: 8; }
+    .box-res { fill: #eefbf1; stroke: #2c8a4a; stroke-width: 1.5; rx: 8; }
+    .lbl { font-size: 14px; fill: #1a1a1a; }
+    .lbl-b { font-size: 14px; fill: #1a1a1a; font-weight: 600; }
+    .cat { font-size: 12px; fill: #555; }
+    .arrow { stroke: #555; stroke-width: 1.6; marker-end: url(#arrowhead); fill: none; }
+    .title { font-size: 20px; font-weight: 700; fill: #1a1a1a; }
+    .sub { font-size: 13px; fill: #444; }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="560" fill="#ffffff"/>
+  <text x="30" y="34" class="title">AGDLP – Group Nesting für Buchhaltung und Sekretariat</text>
+  <text x="30" y="54" class="sub">Account → globale Gruppe (A) → domänenlokale Gruppe (DL) → Ordnerberechtigung (P)</text>
+
+  <!-- Column headers -->
+  <text x="130" y="90" class="cat">Benutzer (A)</text>
+  <text x="380" y="90" class="cat">Globale Gruppen (G)</text>
+  <text x="630" y="90" class="cat">Domänenlokale Gruppen (DL)</text>
+  <text x="850" y="90" class="cat">Ordner (P)</text>
+
+  <!-- Users -->
+  <rect x="40" y="110" width="180" height="40" class="box"/>
+  <text x="130" y="135" text-anchor="middle" class="lbl">Jasmin Müller (jmueller)</text>
+
+  <rect x="40" y="200" width="180" height="40" class="box"/>
+  <text x="130" y="225" text-anchor="middle" class="lbl">Tom Bucher (tbucher)</text>
+
+  <rect x="40" y="290" width="180" height="40" class="box"/>
+  <text x="130" y="315" text-anchor="middle" class="lbl">Sara Lehmann (slehmann)</text>
+
+  <rect x="40" y="380" width="180" height="40" class="box"/>
+  <text x="130" y="405" text-anchor="middle" class="lbl">Kevin Promoter (kpromoter)</text>
+
+  <!-- Global groups -->
+  <rect x="290" y="110" width="180" height="40" class="box"/>
+  <text x="380" y="135" text-anchor="middle" class="lbl-b">Sekretariat</text>
+
+  <rect x="290" y="200" width="180" height="40" class="box"/>
+  <text x="380" y="225" text-anchor="middle" class="lbl-b">Buchhaltung</text>
+
+  <rect x="290" y="290" width="180" height="40" class="box"/>
+  <text x="380" y="315" text-anchor="middle" class="lbl-b">GL</text>
+
+  <rect x="290" y="380" width="180" height="40" class="box"/>
+  <text x="380" y="405" text-anchor="middle" class="lbl-b">Promoter</text>
+
+  <!-- DL groups -->
+  <rect x="540" y="80" width="200" height="40" class="box-dl"/>
+  <text x="640" y="105" text-anchor="middle" class="lbl-b">DL-Sekretariat-Change</text>
+
+  <rect x="540" y="150" width="200" height="40" class="box-dl"/>
+  <text x="640" y="175" text-anchor="middle" class="lbl-b">DL-Sekretariat-Read</text>
+
+  <rect x="540" y="360" width="200" height="40" class="box-dl"/>
+  <text x="640" y="385" text-anchor="middle" class="lbl-b">DL-Buchhaltung-Change</text>
+
+  <rect x="540" y="430" width="200" height="40" class="box-dl"/>
+  <text x="640" y="455" text-anchor="middle" class="lbl-b">DL-Buchhaltung-Read</text>
+
+  <!-- Folders -->
+  <rect x="800" y="115" width="150" height="40" class="box-res"/>
+  <text x="875" y="140" text-anchor="middle" class="lbl">Sekretariat</text>
+  <text x="875" y="155" text-anchor="middle" class="cat">Change / Read</text>
+
+  <rect x="800" y="380" width="150" height="40" class="box-res"/>
+  <text x="875" y="405" text-anchor="middle" class="lbl">Buchhaltung</text>
+  <text x="875" y="420" text-anchor="middle" class="cat">Change / Read</text>
+
+  <!-- Arrows: users -> global groups -->
+  <path class="arrow" d="M220,130 L290,130"/>
+  <path class="arrow" d="M220,220 L290,220"/>
+  <path class="arrow" d="M220,310 L290,310 L290,320"/>
+  <path class="arrow" d="M220,400 L290,400"/>
+
+  <!-- global -> DL: Sekretariat -> DL-Sekretariat-Change -->
+  <path class="arrow" d="M470,120 C505,110 505,100 540,100"/>
+  <!-- Sekretariat, GL, Promoter -> DL-Sekretariat-Read -->
+  <path class="arrow" d="M470,135 C505,150 505,168 540,168"/>
+  <path class="arrow" d="M470,305 C505,260 505,200 540,175"/>
+  <path class="arrow" d="M470,395 C505,300 505,200 540,178"/>
+
+  <!-- Buchhaltung -> DL-Buchhaltung-Change -->
+  <path class="arrow" d="M470,215 C505,300 505,370 540,378"/>
+  <!-- Sekretariat, GL, Promoter -> DL-Buchhaltung-Read -->
+  <path class="arrow" d="M470,140 C505,250 505,420 540,445"/>
+  <path class="arrow" d="M470,300 C505,360 505,420 540,448"/>
+  <path class="arrow" d="M470,390 C505,410 505,430 540,450"/>
+
+  <!-- DL -> folders -->
+  <path class="arrow" d="M740,100 C770,110 780,120 800,130"/>
+  <path class="arrow" d="M740,170 C770,155 780,145 800,138"/>
+  <path class="arrow" d="M740,380 C770,392 780,396 800,398"/>
+  <path class="arrow" d="M740,450 C770,430 780,415 800,405"/>
+
+  <text x="30" y="500" class="sub">Berechtigung liegt nur auf der DL-Gruppe am Ordner. Wer wo Zugriff hat, steuert man über die Mitgliedschaft</text>
+  <text x="30" y="520" class="sub">der globalen Abteilungsgruppen in den DL-Gruppen – nicht mehr über direkte NTFS-Einträge pro Abteilung.</text>
+</svg>
