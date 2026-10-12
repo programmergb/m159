@@ -1,0 +1,96 @@
+<svg viewBox="0 0 1180 620" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <style>
+    .root { fill: #2c5da8; }
+    .ou1 { fill: #3d76c9; }
+    .ou2 { fill: #6fa0e0; }
+    .leaf { fill: #cfe2f7; stroke: #2c5da8; stroke-width: 1.2; }
+    .box { rx: 6; }
+    .t-white { font-size: 13px; fill: #ffffff; text-anchor: middle; }
+    .t-dark { font-size: 12px; fill: #10305c; text-anchor: middle; }
+    .line { stroke: #90a4bd; stroke-width: 1.4; fill: none; }
+    .title { font-size: 20px; font-weight: 700; fill: #1a1a1a; }
+    .dn { font-size: 12px; fill: #444; }
+    .dnbox { fill: #fff8e1; stroke: #b8860b; stroke-width: 1; rx: 5; }
+  </style>
+
+  <rect x="0" y="0" width="1180" height="620" fill="#ffffff"/>
+  <text x="30" y="30" class="title">DIT – corp.m159giacomo.dynv6.net</text>
+
+  <!-- Root -->
+  <rect x="500" y="50" width="180" height="36" class="root box"/>
+  <text x="590" y="73" class="t-white">corp.m159giacomo…</text>
+
+  <!-- Intern / Extern -->
+  <rect x="300" y="130" width="140" height="34" class="ou1 box"/>
+  <text x="370" y="152" class="t-white">OU=Intern</text>
+
+  <rect x="740" y="130" width="140" height="34" class="ou1 box"/>
+  <text x="810" y="152" class="t-white">OU=Extern</text>
+
+  <path class="line" d="M590,86 L370,130"/>
+  <path class="line" d="M590,86 L810,130"/>
+
+  <!-- Abteilungen unter Intern -->
+  <rect x="90" y="200" width="150" height="32" class="ou2 box"/>
+  <text x="165" y="221" class="t-white">OU=Sekretariat</text>
+  <rect x="260" y="200" width="150" height="32" class="ou2 box"/>
+  <text x="335" y="221" class="t-white">OU=Buchhaltung</text>
+  <rect x="430" y="200" width="150" height="32" class="ou2 box"/>
+  <text x="505" y="221" class="t-white">OU=GL</text>
+
+  <path class="line" d="M370,164 L165,200"/>
+  <path class="line" d="M370,164 L335,200"/>
+  <path class="line" d="M370,164 L505,200"/>
+
+  <!-- Abteilung unter Extern -->
+  <rect x="740" y="200" width="150" height="32" class="ou2 box"/>
+  <text x="815" y="221" class="t-white">OU=Promoter</text>
+  <path class="line" d="M810,164 L815,200"/>
+
+  <!-- Blaetter je Abteilung: Benutzer/Computer -->
+  <!-- Sekretariat -->
+  <rect x="70" y="270" width="90" height="30" class="leaf box"/>
+  <text x="115" y="290" class="t-dark">OU=Benutzer</text>
+  <rect x="170" y="270" width="90" height="30" class="leaf box"/>
+  <text x="215" y="290" class="t-dark">OU=Computer</text>
+  <path class="line" d="M165,232 L115,270"/>
+  <path class="line" d="M165,232 L215,270"/>
+
+  <!-- Buchhaltung -->
+  <rect x="280" y="270" width="90" height="30" class="leaf box"/>
+  <text x="325" y="290" class="t-dark">OU=Benutzer</text>
+  <rect x="380" y="270" width="90" height="30" class="leaf box"/>
+  <text x="425" y="290" class="t-dark">OU=Computer</text>
+  <path class="line" d="M335,232 L325,270"/>
+  <path class="line" d="M335,232 L425,270"/>
+
+  <!-- GL -->
+  <rect x="460" y="270" width="90" height="30" class="leaf box"/>
+  <text x="505" y="290" class="t-dark">OU=Benutzer</text>
+  <rect x="560" y="270" width="90" height="30" class="leaf box"/>
+  <text x="605" y="290" class="t-dark">OU=Computer</text>
+  <path class="line" d="M505,232 L505,270"/>
+  <path class="line" d="M505,232 L605,270"/>
+
+  <!-- Promoter -->
+  <rect x="770" y="270" width="90" height="30" class="leaf box"/>
+  <text x="815" y="290" class="t-dark">OU=Benutzer</text>
+  <rect x="870" y="270" width="90" height="30" class="leaf box"/>
+  <text x="915" y="290" class="t-dark">OU=Computer</text>
+  <path class="line" d="M815,232 L815,270"/>
+  <path class="line" d="M815,232 L915,270"/>
+
+  <!-- DN Beispiele -->
+  <rect x="40" y="340" width="500" height="70" class="dnbox"/>
+  <text x="50" y="360" class="dn" font-weight="600">DN eines Benutzers (Jasmin Müller, Sekretariat):</text>
+  <text x="50" y="380" class="dn">CN=Jasmin Müller,OU=Benutzer,OU=Sekretariat,OU=Intern,</text>
+  <text x="50" y="396" class="dn">DC=corp,DC=m159giacomo,DC=dynv6,DC=net</text>
+
+  <rect x="600" y="340" width="530" height="70" class="dnbox"/>
+  <text x="610" y="360" class="dn" font-weight="600">DN eines Computers (client1, Testclient Sekretariat):</text>
+  <text x="610" y="380" class="dn">CN=CLIENT1,OU=Computer,OU=Sekretariat,OU=Intern,</text>
+  <text x="610" y="396" class="dn">DC=corp,DC=m159giacomo,DC=dynv6,DC=net</text>
+
+  <text x="40" y="440" class="dn">Regeln: jede Abteilung nur einmal als OU · Intern/Extern als eigene Ebene · letzte Ebene trennt</text>
+  <text x="40" y="458" class="dn">Benutzer- und Computerkonten · eindeutige Namen je Ebene.</text>
+</svg>
