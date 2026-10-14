@@ -213,3 +213,18 @@ Add-LocalGroupMember -Group "Remote Desktop Users" -Member "CORP\RDP-Users"
 In einer produktiven Umgebung würde man diese Zuweisung zentral über eine Gruppenrichtlinie
 verteilen. Wer RDP-Zugriff erhalten soll, wird künftig einfach Mitglied der passenden
 Gruppe.
+
+### Entscheidungsprotokoll RDP-Konzept
+
+| Option | Vorteil | Nachteil |
+| --- | --- | --- |
+| Jeden Benutzer einzeln in die lokale Gruppe `Remote Desktop Users` eintragen | einfach, ohne zusätzliche Gruppen | bei jeder Änderung auf jedem Client anfassen, unübersichtlich |
+| Zwei Domänengruppen (`RDP-Admins`, `RDP-Users`) einmal lokal zuweisen | Zugriff ändert sich nur über die Gruppenmitgliedschaft im AD | die Zuweisung auf dem Client ist zuerst manuell |
+| Zuweisung zentral per Gruppenrichtlinie | gilt automatisch für alle Clients | für diese Übung zu früh, die GPOs folgen erst in Auftrag 07 |
+
+**Entscheid:** Zwei Domänengruppen, lokal zugewiesen. Der Auftrag verlangt, die Logik zuerst
+manuell umzusetzen, und so lässt sie sich später ohne Änderung in eine GPO überführen.
+`RDP-Admins` bekommt dafür die lokale Gruppe *Administrators*. Das ist grosszügig: Wer in
+dieser Gruppe ist, hat auf dem Client volle Rechte, nicht nur das Recht zur RDP-Anmeldung. Für
+normale Benutzer genügt deshalb `RDP-Users`. In Auftrag 04 habe ich ihr die Abteilungsgruppen
+hinzugefügt, damit die Testbenutzer sich anmelden können.
