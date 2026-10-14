@@ -2,10 +2,9 @@
 
 | Wofür eingesetzt | Prompt (sinngemäss) | Wie verifiziert | Ergebnis |
 | --- | --- | --- | --- |
-| Befehle für Benutzer, Gruppen, Ordner, Freigaben, NTFS-Rechte und ABE | Auftrag und Berechtigungsmatrix lesen und meine Abteilungen daraus als Befehle umsetzen | `Get-ADGroupMember` für die Gruppen, `icacls` für alle neun Ordner (keine geerbten Rechte, kein `BUILTIN\Users`), `Get-SmbShare`, `FolderEnumerationMode` | Alle Berechtigungen stimmen mit der Matrix überein |
-| Matrix aus dem Bild in Rechte übersetzen | Berechtigungsmatrix (Bild) für meine vier Abteilungen als Tabelle aufschreiben. Ich sollte die Tabelle selbst gegen das Original prüfen | Die Tabelle gegen die Matrix kontrolliert und die Rechte in der Praxis getestet | Drei Tests als `jmueller`, `slehmann`, `kpromoter` auf `client1` ergeben genau die erwarteten Ergebnisse (lesen, schreiben, kein Zugriff) |
-| AGDLP-Konzept entwerfen | Verbesserung der Rechtestruktur für zwei Abteilungen vorschlagen | `icacls` zeigt auf `Buchhaltung` und `Sekretariat` nur noch die `DL-…`-Gruppen | Konzept als Diagramm und auf beiden Ordnern umgesetzt |
+| Befehle für Benutzer, Gruppen, Freigaben, NTFS-Rechte und ABE aus der Berechtigungsmatrix | Matrix für meine Abteilungen in Befehle übersetzen, ich prüfe die Tabelle selbst | `icacls` aller neun Ordner und drei Tests als `jmueller`, `slehmann`, `kpromoter` | Rechte stimmen mit der Matrix überein |
+| AGDLP-Konzept | Verbesserung der Rechtestruktur für zwei Abteilungen vorschlagen | `icacls` zeigt nur noch die `DL-…`-Gruppen | Als Diagramm und auf zwei Ordnern umgesetzt |
 
 ### Reflexion
-1. **Wo hat die KI geholfen?** Beim Übertragen der Matrix in Befehle und beim Entwurf des AGDLP-Konzepts mit Diagramm.
-2. **Wo lag sie falsch oder musste ich korrigieren, und wie habe ich es gemerkt?** Beim Anlegen der Benutzer lehnte die Domäne mein Passwort ab (Richtlinie), dabei blieben deaktivierte Konten zurück. Ich habe das mit `Get-ADUser … Enabled` geprüft und mit gültigem Passwort repariert. Beim AGDLP-Konzept hat die KI der Geschäftsleitung auf den umgestellten Ordnern nur noch Lesen gegeben. Das habe ich übernommen, weil ich es begründen kann: Die GL braucht Einsicht, aber nicht überall Schreibrechte.
+1. **Wo hat die KI geholfen?** Beim Übertragen der Matrix in Befehle und beim AGDLP-Entwurf.
+2. **Wo lag sie falsch oder musste ich korrigieren?** Mein erstes Benutzerpasswort verletzte die Richtlinie, dabei blieben deaktivierte Konten zurück. Ich habe das mit `Get-ADUser … Enabled` geprüft und repariert. Beim AGDLP-Konzept bekam die GL nur noch Lesen. Das habe ich übernommen, weil sie Einsicht, aber nicht überall Schreibrechte braucht.
