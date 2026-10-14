@@ -8,4 +8,4 @@
 
 ### Reflexion
 1. **Wo hat die KI geholfen?** Beim Aufteilen des grossen Auftrags in prüfbare Schritte und bei den PowerShell-Befehlen für DNS und AD.
-2. **Wo lag sie falsch, und wie habe ich es gemerkt?** Der erste Befehl nannte die Rolle `AD-DS`. Richtig heisst sie `AD-Domain-Services`. PowerShell meldete `The role, role service, or feature name is not valid`. Ausserdem war ich zuerst in der CMD statt in der PowerShell, weil ich den Prompt (`PS` fehlte) nicht beachtet hatte. Bei den Reverse-Zonen hat die KI erklärt, dass Windows nur `/24` anlegt und nicht `/20`. Das habe ich geprüft, indem ich die Zonen angelegt und mit `nslookup` rückwärts getestet habe.
+2. **Wo lag sie falsch, und wie habe ich es gemerkt?** Keine relevanten Fehler der KI. Der Port-Test hat eine Lücke in der Planung aufgedeckt (Port 139, siehe Tabelle).

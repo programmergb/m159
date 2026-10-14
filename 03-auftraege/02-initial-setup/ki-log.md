@@ -8,4 +8,4 @@
 
 ### Reflexion
 1. **Wo hat die KI geholfen?** Beim schnellen Durchlaufen der Standardeinstellungen mit fertigen Befehlen und beim Verstehen der Lab-Fehlermeldung.
-2. **Wo lag sie falsch, und wie habe ich es gemerkt?** Ich hatte die Arbeit zuerst als «Auftrag 3» bezeichnet, es ist aber Auftrag 02 (Initial Setup). Das fiel beim Abgleich mit der Nummerierung im Repository auf. Ausserdem hatte ich in diesem Chat ein Administrator-Passwort genannt. Der Chat wies selbst darauf hin, dass ich es ändern soll, und ich habe es geändert. Solche Werte gehören nicht in einen Prompt.
+2. **Wo lag sie falsch, und wie habe ich es gemerkt?** Keine relevanten Fehler festgestellt. Alle Einstellungen habe ich mit Abfragen auf den Servern geprüft.

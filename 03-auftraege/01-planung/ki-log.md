@@ -7,4 +7,4 @@
 
 ### Reflexion
 1. **Wo hat die KI geholfen?** Beim Aufbau der Planung (Gliederung, Begründungen zu Namen, IPs und Ports) und beim Eingrenzen der Azure-Fehlermeldungen.
-2. **Wo lag sie falsch oder unvollständig, und wie habe ich es gemerkt?** Die Sicherheitsgruppe für den DC hatte Port 139 nicht. Das fiel erst in Auftrag 03 auf, als `Test-NetConnection` auf diesen Port `False` zeigte. Daraus habe ich gelernt, dass eine Planung erst durch den Test in der Umgebung bestätigt ist.
+2. **Wo lag sie falsch oder unvollständig, und wie habe ich es gemerkt?** Die Sicherheitsgruppe für den DC hatte Port 139 nicht. Das fiel erst in Auftrag 03 auf, als `Test-NetConnection` auf diesen Port `False` zeigte. Eine Planung ist erst durch den Test in der Umgebung bestätigt.
