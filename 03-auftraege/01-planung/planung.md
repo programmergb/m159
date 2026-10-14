@@ -8,13 +8,13 @@ und werden hier bewusst nicht dupliziert.
 
 | Punkt | Status |
 | --- | --- |
-| Azure for Students aktiviert | offen |
-| Entra-ID-Tenant erreichbar | offen |
-| AWS-Account bereit | offen |
+| Azure for Students aktiviert | erledigt |
+| Entra-ID-Tenant erreichbar | erledigt |
+| AWS-Account bereit | erledigt (Lab läuft, siehe Auftrag 02) |
 
-Nachweis-Screenshots (Azure-Aktivierung, Entra-Tenant) folgen hier in `resources/`, sobald die
-Accounts aktiviert sind. Passwörter werden grundsätzlich nicht in diesem Repository abgelegt,
-sondern separat in einem Passwort-Manager.
+Die Cloud-Bereitschaft (Azure for Students und Entra ID) habe ich gemeinsam mit der Lehrperson
+eingerichtet. Nach Absprache braucht es dafür keine Nachweis-Screenshots. Passwörter werden
+grundsätzlich nicht in diesem Repository abgelegt, sondern separat in einem Passwort-Manager.
 
 ## Namenskonzept
 
@@ -74,6 +74,5 @@ Für Auftrag 04 (Freigaben/Berechtigungen) plane ich je einen fiktiven Benutzer 
 
 ## Offene Punkte
 
-- Azure for Students / AWS-Account aktivieren, Nachweis-Screenshots ablegen
-- Entra-ID-Tenant-Domain und Global-Administrator-Konto nach Tenant-Erstellung ergänzen
+- Entra-ID-Domain und Global-Administrator-Konto trage ich mit Auftrag 10 ein
 - Python-App-Registrierung (Tenant/Client-ID) folgt erst mit Auftrag 13
